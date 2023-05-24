@@ -1,14 +1,31 @@
 // printed-books/:book-id
 // @ts-nocheck
+import React, { useState, useEffect } from "react";
 import { CountQueuingStrategy } from "stream/web";
 import data from "../data.json";
 
 import { useRouter } from "next/router";
 
 export default function ProsAndCons() {
+  const router = useRouter();
   const { query } = useRouter();
 
-  let prosAndConsArray = query.arr ? JSON.parse(query.arr) : null;
+  // const [pAndCArr, setPAndCArr] = useState(null);
+
+  // useEffect(() => {
+  //   if (router.isReady) {
+  //     let prosAndConsArray = JSON.parse(query.arr);
+  //     // return prosAndConsArray;
+
+  //     setPAndCArr(prosAndConsArray);
+  //   }
+  // }, [router.isReady]);
+
+  if (!query.arr) {
+    return null;
+  }
+
+  let prosAndConsArray = JSON.parse(query.arr);
 
   return (
     <div>
