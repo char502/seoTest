@@ -1,3 +1,4 @@
+// @ts-nocheck
 // import type {
 //   GetServerSideProps,
 //   InferGetServerSidePropsType,
@@ -6,17 +7,35 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import data from "../data.json";
-import ProsAndCons from "./ProsAndCons";
+// import ProsAndCons from "./ProsAndCons";
 import Link from "next/link";
 
-
+import StructuredData from "../components/StructuredData";
 
 const Article /* :NextPage */ = ({
   extra,
   products,
 }/* :InferGetServerSidePropsType<typeof getServerSideProps>) */) => {
   console.log(data);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    // headline: post.title,
+    // description: post.description,
+    // author: [
+    //   {
+    //     "@type": "Person",
+    //     name: post.author,
+    //   },
+    // ],
+    // image: post.imageUrl,
+    // datePublished: post.publishedAt,
+  };
+
   return (
+    <>
+    <StructuredData data={structuredData} />
     <div className={styles.container}>
       <Head>
         <title>Brightsites seo test</title>
@@ -55,11 +74,12 @@ const Article /* :NextPage */ = ({
       </main>
       <footer className={styles.footer}></footer>
     </div>
+    </>
   );
+    
+    
+    
 };
-
-
-
 
 export const getServerSideProps /* :GetServerSideProps */ = async (context) => {
   context.res.setHeader(
