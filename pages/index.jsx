@@ -72,7 +72,7 @@ const Article /* :NextPage */ = ({
 
   return (
     <>
-    <StructuredData data={structuredData} />
+    {/* <StructuredData data={structuredData} /> */}
     <div className={styles.container}>
       <Head>
         <title>Mobile Phone Reviews</title>
