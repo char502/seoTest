@@ -4,11 +4,10 @@
 //   InferGetServerSidePropsType,
 //   NextPage,
 // } from "next";
+import StructuredData from "../components/StructuredData";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import data from "../data.json";
-// import ProsAndCons from "./ProsAndCons";
-import Link from "next/link";
 
 const Article /* :NextPage */ = ({
   extra,
@@ -16,46 +15,88 @@ const Article /* :NextPage */ = ({
 }/* :InferGetServerSidePropsType<typeof getServerSideProps>) */) => {
   console.log(data);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: products[0]?.data?.title,
+    id: products[0]?.data?.id,
+    review: {
+      "@type": "Review",
+      name: products[0]?.data?.title,
+    },
+    positiveNotes: {
+      "@type": "ItemList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: products[0]?.data?.information?.pros?.pros[0],
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: products[0]?.data?.information?.pros?.pros[1],
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: products[0]?.data?.information?.pros?.pros[2],
+        },
+      ],
+    },
+    negativeNotes: {
+      "@type": "ItemList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: products[0]?.data?.information?.cons?.cons[0],
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: products[0]?.data?.information?.cons?.cons[1],
+        },
+      ],
+    },
+  };
+
   return (
     <>
-    <div className={styles.container}>
-      <Head>
-        <title>Mobile Phone Reviews</title>
-        <meta name="description" content="Brightsites seo test" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <StructuredData data={structuredData} />
+      <div className={styles.container}>
+        <Head>
+          <title>Mobile Phone Review</title>
+          <meta name="description" content="Brightsites seo test" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>Mobile Phone Reviews</h1>
+        <main className={styles.main}>
+          <h1 className={styles.title}>Mobile Phone Reviews</h1>
 
-        <h1>Phones</h1>
+          <h1>Phone Model: {products[0]?.data?.title}</h1>
 
-        {prosAndConsObj?.map((item) => (
-          <div key={item.id}>
+              <h2>ID: {products[0]?.data?.id}</h2>
 
-            <ul key={item.itemTitle}>
-              <li>
-                <Link href={{
-                  pathname: `/${item.id}`,
-                  query: {
-                    id: item.id,
-                    title: item.itemTitle,
-                    arr: JSON.stringify(item.prosAndConsArr)
-                  }
-                }}>
+              <h2>Pros and Cons Data</h2>
 
-                  <a><h3>{item.itemTitle}</h3></a>
-                </Link>
-              </li>
-            </ul>
+              <h4>Pros</h4>
+              {products[0]?.data?.information?.pros?.pros?.map((pro) => (
+                <ul key={pro}>
+                  <li>{pro}</li>
+                </ul>
+              ))}
 
-          </div>
-        ))}
+              <h4>Cons</h4>
+              {products[0]?.data?.information?.cons?.cons?.map((con) => (
+                <ul key={con}>
+                  <li>{con}</li>
+                </ul>
+              ))}
 
-        {/* <ProsAndCons data={data} /> */}
-      </main>
-      <footer className={styles.footer}></footer>
-    </div>
+        </main>
+        <footer className={styles.footer}></footer>
+      </div>
     </>
   );
 };
@@ -78,25 +119,3 @@ export const getServerSideProps /* :GetServerSideProps */ = async (context) => {
   }
 };
 export default Article;
-
-export const prosAndConsObj = data.products.map((product) => {
-  const prosObj = {
-    pros: product.data.information.pros,
-  };
-
-  const consObj = {
-    cons: product.data.information.cons,
-  };
-
-  const pACArr = [prosObj, consObj];
-
-  const finalReviewObj = {
-    id: product.data.id,
-    itemTitle: product.data.title,
-    prosAndConsArr: pACArr,
-  };
-
-  return finalReviewObj;
-});
-
-console.log(prosAndConsObj);
