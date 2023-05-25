@@ -18,33 +18,70 @@ const Article /* :NextPage */ = ({
 }/* :InferGetServerSidePropsType<typeof getServerSideProps>) */) => {
   console.log(data);
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Review",
-    // headline: post.title,
-    // description: post.description,
-    // author: [
-    //   {
-    //     "@type": "Person",
-    //     name: post.author,
-    //   },
-    // ],
-    // image: post.imageUrl,
-    // datePublished: post.publishedAt,
-  };
+  // const structuredData = {
+  //   "@context": "https://schema.org",
+  //   "@type": "Product",
+  //   // "name": "Samsung galaxy A53",
+  //   "name": data.products.title,
+  //   "review": {
+  //         "@type": "Review",
+  //         // "name": "Samsung galaxy A53 review",
+  //         "name": data.products.title,
+  //       },
+  //   "positiveNotes": {
+  //           "@type": "ItemList",
+  //           "itemListElement": [
+  //             {
+  //               "@type": "ListItem",
+  //               "position": 1,
+  //               "name": "Stunning Screen",
+  //               "name": data.products.data.information.pros[0]
+  //             },
+  //             {
+  //               "@type": "ListItem",
+  //               "position": 2,
+  //               "name": "Quality Cameras",
+  //               "name": data.products.data.information.pros[1]
+  //             },
+  //             {
+  //               "@type": "ListItem",
+  //               "position": 3,
+  //               "name": "Five years of security updates",
+  //               "name": data.products.data.information.pros[2]
+  //             }
+  //           ]
+  //         },
+  //         "negativeNotes": {
+  //           "@type": "ItemList",
+  //           "itemListElement": [
+  //             {
+  //               "@type": "ListItem",
+  //               "position": 1,
+  //               "name": "No wireless charging",
+  //               "name": data.products.data.information.cons[0]
+  //             },
+  //             {
+  //               "@type": "ListItem",
+  //               "position": 2,
+  //               "name": "Average performance",
+  //               "name": data.products.data.information.cons[1]
+  //             }
+  //           ]
+  //         }
+  // };
 
   return (
     <>
     <StructuredData data={structuredData} />
     <div className={styles.container}>
       <Head>
-        <title>Brightsites seo test</title>
+        <title>Mobile Phone Reviews</title>
         <meta name="description" content="Brightsites seo test" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Seo test</h1>
+        <h1 className={styles.title}>Mobile Phone Reviews</h1>
 
         <h1>Phones</h1>
 

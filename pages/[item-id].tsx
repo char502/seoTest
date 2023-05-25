@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from "react";
+import StructuredData from "../components/StructuredData";
 
 import { useRouter } from "next/router";
 
@@ -12,22 +13,71 @@ export default function ProsAndCons() {
 
   let prosAndConsArray = JSON.parse(query.arr);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    // "name": "Samsung galaxy A53",
+    name: query.title,
+    review: {
+      "@type": "Review",
+      // "name": "Samsung galaxy A53 review",
+      name: query.title,
+    },
+    positiveNotes: {
+      "@type": "ItemList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          // name: "Stunning Screen",
+          name: query.arr[0].pros.pros[0],
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          // name: "Quality Cameras",
+          name: query.arr[0].pros.pros[1],
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          // name: "Five years of security updates",
+          name: query.arr[0].pros.pros[2],
+        },
+      ],
+    },
+    negativeNotes: {
+      "@type": "ItemList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          // name: "No wireless charging",
+          name: query.arr[0].cons.cons[0],
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          // name: "Average performance",
+          name: query.arr[0].cons.cons[1],
+        },
+      ],
+    },
+  };
+
   return (
-    <div
-      style={{
-        textAlign: "center",
-        listStylePosition: "inside",
-      }}
-    >
+    <>
+      <StructuredData data={structuredData} />
+
       <div
         style={{
           textAlign: "center",
           listStylePosition: "inside",
         }}
       >
-        <h1>ID: {query?.id}</h1>
-
         <h1>Phone Model: {query?.title}</h1>
+
+        <h2>ID: {query?.id}</h2>
 
         <h2>Pros and Cons Data</h2>
 
@@ -45,6 +95,6 @@ export default function ProsAndCons() {
           </ul>
         ))}
       </div>
-    </div>
+    </>
   );
 }
