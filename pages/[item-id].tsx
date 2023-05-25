@@ -13,6 +13,11 @@ export default function ProsAndCons() {
 
   let prosAndConsArray = JSON.parse(query.arr);
 
+  // as per the pros and cons guidelines detailed here:
+  //developers.google.com/search/blog/2022/08/pros-and-cons-structured-data
+  // and here
+  // https://developers.google.com/search/docs/appearance/structured-data/product
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
