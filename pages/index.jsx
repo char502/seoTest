@@ -10,69 +10,14 @@ import data from "../data.json";
 // import ProsAndCons from "./ProsAndCons";
 import Link from "next/link";
 
-import StructuredData from "../components/StructuredData";
-
 const Article /* :NextPage */ = ({
   extra,
   products,
 }/* :InferGetServerSidePropsType<typeof getServerSideProps>) */) => {
   console.log(data);
 
-  // const structuredData = {
-  //   "@context": "https://schema.org",
-  //   "@type": "Product",
-  //   // "name": "Samsung galaxy A53",
-  //   "name": data.products.title,
-  //   "review": {
-  //         "@type": "Review",
-  //         // "name": "Samsung galaxy A53 review",
-  //         "name": data.products.title,
-  //       },
-  //   "positiveNotes": {
-  //           "@type": "ItemList",
-  //           "itemListElement": [
-  //             {
-  //               "@type": "ListItem",
-  //               "position": 1,
-  //               "name": "Stunning Screen",
-  //               "name": data.products.data.information.pros[0]
-  //             },
-  //             {
-  //               "@type": "ListItem",
-  //               "position": 2,
-  //               "name": "Quality Cameras",
-  //               "name": data.products.data.information.pros[1]
-  //             },
-  //             {
-  //               "@type": "ListItem",
-  //               "position": 3,
-  //               "name": "Five years of security updates",
-  //               "name": data.products.data.information.pros[2]
-  //             }
-  //           ]
-  //         },
-  //         "negativeNotes": {
-  //           "@type": "ItemList",
-  //           "itemListElement": [
-  //             {
-  //               "@type": "ListItem",
-  //               "position": 1,
-  //               "name": "No wireless charging",
-  //               "name": data.products.data.information.cons[0]
-  //             },
-  //             {
-  //               "@type": "ListItem",
-  //               "position": 2,
-  //               "name": "Average performance",
-  //               "name": data.products.data.information.cons[1]
-  //             }
-  //           ]
-  //         }
-  // };
-
   return (
     <>
-    {/* <StructuredData data={structuredData} /> */}
     <div className={styles.container}>
       <Head>
         <title>Mobile Phone Reviews</title>
