@@ -58,9 +58,6 @@ const Article /* :NextPage */ = ({
     </div>
     </>
   );
-    
-    
-    
 };
 
 export const getServerSideProps /* :GetServerSideProps */ = async (context) => {
@@ -82,7 +79,7 @@ export const getServerSideProps /* :GetServerSideProps */ = async (context) => {
 };
 export default Article;
 
-const prosAndConsObj = data.products.map((product) => {
+export const prosAndConsObj = data.products.map((product) => {
   const prosObj = {
     pros: product.data.information.pros,
   };
