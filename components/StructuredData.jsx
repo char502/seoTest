@@ -2,7 +2,7 @@ import Head from "next/head";
 
 export default function StructuredData({ data }) {
   return (
-    <Head children={undefined}>
+    <Head>
       <script
         key="structured-data"
         type="application/ld+json"
