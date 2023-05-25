@@ -23,6 +23,7 @@ export default function ProsAndCons() {
     "@type": "Product",
     // "name": "Samsung galaxy A53",
     name: query.title,
+    id: query.id,
     review: {
       "@type": "Review",
       // "name": "Samsung galaxy A53 review",
