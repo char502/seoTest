@@ -19,7 +19,7 @@ const Article /* :NextPage */ = ({
     "@context": "https://schema.org",
     "@type": "Product",
     name: products[0]?.data?.title,
-    id: products[0]?.data?.id,
+    // id: products[0]?.data?.id,
     review: {
       "@type": "Review",
       name: products[0]?.data?.title,
