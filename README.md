@@ -25,7 +25,7 @@ As per the Instructions, I have added added structured data with a review snippe
  - I have then written a test to check that the correct data is being rendered.
   Notes on the test:
     - The data is already local so I haven't created mock data but in the real world the data would be mocked so data fetching would not interfere with the test
-    - The mocked data would be in TypeScript containing the interfaces I have described in Index.tsx, and passed into the test component as a prop) to show that the data was coming from a valid pro and cons array (I would have done this but ran out of time)
+    - The mocked data would be in TypeScript containing the interfaces I have described in Index.tsx, (and passed into the test component as a prop) to show that the data was coming from a valid pro and cons array (I would have done this but ran out of time).
   
   
 I hope this is ok
