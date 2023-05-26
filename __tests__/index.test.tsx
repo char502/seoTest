@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import Home from "./index";
+import Home from "../pages/index";
 
 // import data from "../data.json";
 // import prosAndConsObj from "./index";
