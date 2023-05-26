@@ -60,10 +60,7 @@ export default function Article({
     brand: products[0]?.data?.extra?.brand,
     review: {
       "@type": "Review",
-      reviewRating: {
-        "@type": "Rating",
-        rating: products[0]?.data?.extra?.rating,
-      },
+      name: products[0]?.data?.title,
     },
     positiveNotes: {
       "@type": "ItemList",
