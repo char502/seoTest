@@ -39,22 +39,12 @@ export interface DataObj {
   information: InformationObj;
 }
 
-export interface AuthorsObj {
-  name: string;
-}
-
-export interface MainDataObj {
-  authors: AuthorsObj;
-}
-
 export interface ArticleProps {
-  data: MainDataObj;
   extra: ExtraObj;
   products: DataObj;
 }
 
 export default function Article({
-  data,
   products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   if (!products) {
@@ -72,7 +62,7 @@ export default function Article({
       name: products[0]?.data?.title,
       author: {
         "@type": "Person",
-        name: data?.authors?.name,
+        name: "authors name",
       },
     },
     positiveNotes: {
