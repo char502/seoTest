@@ -21,7 +21,7 @@
     "**/*.tsx",
     "components/StructuredData.jsx",
     "pages/index.js",
-    "pages/index.jsx"
+    "pages/index.tsx"
   ],
   "exclude": ["node_modules"]
 }

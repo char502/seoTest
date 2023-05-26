@@ -1,28 +1,69 @@
-// @ts-nocheck
-// import type {
-//   GetServerSideProps,
-//   InferGetServerSidePropsType,
-//   NextPage,
-// } from "next";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import StructuredData from "../components/StructuredData";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import data from "../data.json";
 
-const Article /* :NextPage */ = ({
+export interface ProdSpecObj {
+  value: string;
+  key: string;
+}
+
+export interface ProsObj {
+  pros: string[];
+}
+
+export interface ConsObj {
+  cons: string[];
+}
+
+export interface InformationObj {
+  productSpec: ProdSpecObj;
+  pros: ProsObj;
+  cons: ConsObj;
+}
+
+export interface ExtraObj {
+  bestFor: string;
+  brand: string;
+  information: InformationObj;
+  model: string;
+  priceComparisonProvider: string;
+  productId: string;
+  productIDType: string;
+  rating: string;
+}
+
+export interface DataObj {
+  extra: ExtraObj;
+  information: InformationObj;
+}
+
+export interface ArticleProps {
+  extra: ExtraObj;
+  products: DataObj;
+}
+
+export default function Article({
   extra,
   products,
-}/* :InferGetServerSidePropsType<typeof getServerSideProps>) */) => {
-  console.log(data);
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  if (!products) {
+    return null;
+  }
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: products[0]?.data?.title,
-    // id: products[0]?.data?.id,
+    description: products[0]?.data?.extra?.model,
+    brand: products[0]?.data?.extra?.brand,
     review: {
       "@type": "Review",
-      name: products[0]?.data?.title,
+      reviewRating: {
+        "@type": "Rating",
+        rating: products[0]?.data?.extra?.rating,
+      },
     },
     positiveNotes: {
       "@type": "ItemList",
@@ -76,32 +117,31 @@ const Article /* :NextPage */ = ({
 
           <h1>Phone Model: {products[0]?.data?.title}</h1>
 
-              <h2>ID: {products[0]?.data?.id}</h2>
+          <h2>ID: {products[0]?.data?.id}</h2>
 
-              <h2>Pros and Cons Data</h2>
+          <h2>Pros and Cons Data</h2>
 
-              <h4>Pros</h4>
-              {products[0]?.data?.information?.pros?.pros?.map((pro) => (
-                <ul key={pro}>
-                  <li>{pro}</li>
-                </ul>
-              ))}
+          <h4>Pros</h4>
+          {products[0]?.data?.information?.pros?.pros?.map((pro: string) => (
+            <ul key={pro}>
+              <li>{pro}</li>
+            </ul>
+          ))}
 
-              <h4>Cons</h4>
-              {products[0]?.data?.information?.cons?.cons?.map((con) => (
-                <ul key={con}>
-                  <li>{con}</li>
-                </ul>
-              ))}
-
+          <h4>Cons</h4>
+          {products[0]?.data?.information?.cons?.cons?.map((con: string) => (
+            <ul key={con}>
+              <li>{con}</li>
+            </ul>
+          ))}
         </main>
         <footer className={styles.footer}></footer>
       </div>
     </>
   );
-};
+}
 
-export const getServerSideProps /* :GetServerSideProps */ = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   context.res.setHeader(
     "Cache-Control",
     "public,  s-maxage=300, stale-while-revalidate=59"
@@ -118,4 +158,3 @@ export const getServerSideProps /* :GetServerSideProps */ = async (context) => {
     return { props: { data: "err" } };
   }
 };
-export default Article;
